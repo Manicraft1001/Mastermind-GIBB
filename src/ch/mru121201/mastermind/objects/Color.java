@@ -27,7 +27,7 @@ public class Color {
     }
 
     public String getColorDot() {
-        return getAnsi_code() + "⚪";
+        return getAnsi_code() + "⚫";
     }
 
     @Override
@@ -36,8 +36,6 @@ public class Color {
                 "v=" + color +
                 '}';
     }
-
-    public static final String ANSI_RESET = "\u001B[0m";
 
     public static Optional<Color> getColorFromChar(final char color) {
         return colors.stream().filter(color1 -> color1.color == color).findFirst();

@@ -1,6 +1,7 @@
 package ch.mru121201.mastermind;
 
 import ch.mru121201.mastermind.objects.Color;
+import ch.mru121201.mastermind.utils.AnsiColors;
 import ch.mru121201.mastermind.utils.RandomColorCollector;
 import ch.mru121201.mastermind.utils.RandomMessage;
 
@@ -17,17 +18,17 @@ public class Main {
     }
 
     public void start() {
-        Color.getColors().add(new Color('r', "\u001b[31m"));
-        Color.getColors().add(new Color('g', "\u001b[32m"));
-        Color.getColors().add(new Color('b', "\u001b[34m"));
-        Color.getColors().add(new Color('y', "\u001b[33m"));
-        Color.getColors().add(new Color('w', "\u001b[37m"));
-        Color.getColors().add(new Color('s', "\u001b[30m"));
+        Color.getColors().add(new Color('r', AnsiColors.ANSI_RED));
+        Color.getColors().add(new Color('g', AnsiColors.ANSI_GREEN));
+        Color.getColors().add(new Color('b', AnsiColors.ANSI_BLUE));
+        Color.getColors().add(new Color('y', AnsiColors.ANSI_YELLOW));
+        Color.getColors().add(new Color('w', AnsiColors.ANSI_WHITE));
+        Color.getColors().add(new Color('c', AnsiColors.ANSI_CYAN));
 
         final List<Color> randomColors = RandomColorCollector.getColors(AMOUNT_SECRET_CODES);
 
-        System.out.println("Successfully generated random code! (Solution: " + randomColors.toString() + ")");
-        System.out.println("I bet, you can't find out my wholesome color code.");
+        System.out.println(AnsiColors.ANSI_RED + "Successfully generated random code! (Solution: " + randomColors.toString() + ")");
+        System.out.println(AnsiColors.ANSI_RED + "I bet, you can't find out my wholesome color code.");
 
         gameLoop(randomColors);
     }
@@ -35,13 +36,13 @@ public class Main {
     public void gameLoop(final List<Color> code) {
         final Scanner scanner = new Scanner(System.in);
 
-        boolean finised = false;
+        boolean finish = false;
         int tries = 0;
         int correct = 0;
         int incorrect = 0;
 
-        while (!finised) {
-            System.out.printf((RandomMessage.getEncourage()) + "%n", RandomColorCollector.displayUnknown(code));
+        while (!finish) {
+            System.out.printf(AnsiColors.ANSI_RED + (RandomMessage.getEncourage()) + "%n", RandomColorCollector.displayUnknown(code));
 
             final String input = scanner.next();
             final StringBuilder stringBuilder = new StringBuilder();
@@ -58,31 +59,31 @@ public class Main {
 
                 final Optional<Color> found = Color.getColorFromChar(input.charAt(i));
                 if (!found.isPresent() || !code.contains(found.get())) {
-                    stringBuilder.append("⬜");
+                    stringBuilder.append("⚪");
                     incorrect++;
                     continue;
                 }
 
                 if (found.get().equals(code.get(i))) {
-                    stringBuilder.append(code.get(i).getColorDot()).append(Color.ANSI_RESET);
+                    stringBuilder.append(code.get(i).getColorDot()).append(AnsiColors.ANSI_RESET);
                     correctGuess++;
                     correct++;
                 } else {
-                    stringBuilder.append("⬜");
+                    stringBuilder.append("⚪");
                     correctColor++;
                     incorrect++;
                 }
             }
 
-            System.out.println("Your answer: " + stringBuilder.toString() + " " + correctGuess + " correct colors and positions, " + correctColor + " correct colors");
+            System.out.println(AnsiColors.ANSI_RED + "Your answer: " + stringBuilder.toString() + " " + AnsiColors.ANSI_RED + correctGuess + " correct colors and positions, " + correctColor + " correct colors");
 
             if (correctGuess == code.size()) {
-                finised = true;
+                finish = true;
             }
         }
 
-        System.out.println("Congrats, you finished the game! (" + tries + " tries)");
-        System.out.println("Correct: " + correct + " Incorrect: " + incorrect);
-        System.out.println("Game will quit now...");
+        System.out.println(AnsiColors.ANSI_RED + "Congrats, you finished the game! (" + tries + " tries)");
+        System.out.println(AnsiColors.ANSI_RED + "Correct: " + correct + " Incorrect: " + incorrect);
+        System.out.println(AnsiColors.ANSI_RED + "Game will quit now...");
     }
 }

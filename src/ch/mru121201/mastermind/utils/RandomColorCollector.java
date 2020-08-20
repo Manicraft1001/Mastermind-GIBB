@@ -13,7 +13,14 @@ public class RandomColorCollector {
         return new ArrayList<>(colors);
     }
 
+    /**
+     * Method to display the colors
+     * as unknown chars
+     * @param colors the color collection
+     * @return returns a string with colors replaced
+     * by an unknown char
+     */
     public static String displayUnknown(final List<Color> colors) {
-        return String.join("", Collections.nCopies(colors.size(), "⬜"));
+        return AnsiColors.ANSI_BLACK + MathUtils.repeatCharSequence("⚫", colors.size());
     }
 }
