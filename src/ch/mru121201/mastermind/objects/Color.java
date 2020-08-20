@@ -22,10 +22,6 @@ public class Color {
         this.ansi_code = ansi_code;
     }
 
-    public char getColorFromChar() {
-        return color;
-    }
-
     public String getAnsi_code() {
         return ansi_code;
     }

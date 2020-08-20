@@ -4,7 +4,6 @@ import ch.mru121201.mastermind.objects.Color;
 import ch.mru121201.mastermind.utils.RandomColorCollector;
 import ch.mru121201.mastermind.utils.RandomMessage;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -42,7 +41,7 @@ public class Main {
         int incorrect = 0;
 
         while (!finised) {
-            System.out.println(String.format(RandomMessage.getEncourage(), RandomColorCollector.displayUnknown(code)));
+            System.out.printf((RandomMessage.getEncourage()) + "%n", RandomColorCollector.displayUnknown(code));
 
             final String input = scanner.next();
             final StringBuilder stringBuilder = new StringBuilder();
