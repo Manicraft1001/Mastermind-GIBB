@@ -44,7 +44,8 @@ public class Main {
         while (!finish) {
             System.out.printf(AnsiColors.ANSI_RED + (RandomMessage.getEncourage()) + "%n", RandomColorCollector.displayUnknown(code));
 
-            final String input = scanner.next();
+            final String input = scanner.nextLine().replaceAll(" ", "");
+
             final StringBuilder stringBuilder = new StringBuilder();
             int correctGuess = 0;
             int correctColor = 0;
@@ -82,8 +83,8 @@ public class Main {
             }
         }
 
-        System.out.println(AnsiColors.ANSI_RED + "Congrats, you finished the game! (" + tries + " tries)");
-        System.out.println(AnsiColors.ANSI_RED + "Correct: " + correct + " Incorrect: " + incorrect);
-        System.out.println(AnsiColors.ANSI_RED + "Game will quit now...");
+        System.out.println(AnsiColors.ANSI_GREEN + "Congrats, you finished the game! (" + tries + " tries)");
+        System.out.println(AnsiColors.ANSI_GREEN + "Correct: " + correct + " Incorrect: " + incorrect);
+        System.out.println(AnsiColors.ANSI_GREEN + "Game will quit now...");
     }
 }
